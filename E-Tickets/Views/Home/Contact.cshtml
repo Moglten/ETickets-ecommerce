@@ -1,0 +1,62 @@
+﻿
+@model EmailViewModel
+
+<!-- Bootstrap 5 Contact Form Snippet -->
+<body class="ambody">
+    <div class="container px-5 my-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="card border-0 rounded-3 shadow-lg">
+            <div class="card-body p-4">
+              <div class="text-center">
+                <div class="h1 fw-light">Contact Form</div>
+                 
+              </div>
+
+              <form asp-controller="Home" asp-action="ConformidContact" method="post">
+
+                <!-- Name Input -->
+                <div class="form-floating mb-3">
+                  <input class="form-control" asp-for="Name" id="name" type="text" placeholder="Name"/>
+                  <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <!-- Email Input -->
+                <div class="form-floating mb-3">
+                  <input class="form-control" asp-for="Email" id="emailAddress" type="email" placeholder="Email Address" />
+                  <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                 <!-- subject Input -->
+                <div class="form-floating mb-3">
+                  <input class="form-control"  asp-for="Subject" type="text" placeholder="Subject" />
+                  <span asp-validation-for="Subject" class="text-danger"></span>
+                </div>
+
+                <!-- Message Input -->
+                <div class="form-floating mb-3">
+                  <textarea class="form-control"  i asp-for="Massage" type="text" placeholder="Message..." style="height: 10rem;"></textarea>
+                  <span asp-validation-for="Massage" class="text-danger"></span>
+                </div>
+
+                <!-- Submit success message -->
+                <div class="d-none" id="submitSuccessMessage">
+                  <div class="text-center mb-3">
+                    <div class="fw-bolder">Form submission successful!</div>
+                  </div>
+                </div>
+
+                <div class="text-center">
+                  <button class="btn btn-primary btn-lg align-content-center" id="submitButton" type="submit">Submit</button>
+
+                </div>
+              </form>
+                    @if(ViewBag.result != null)
+                      {
+                         <h3 class="alert alert-success text-center">@ViewBag.result</h3>
+                     }
+            </div>
+        </div>
+      </div>
+    </div>
+</body>

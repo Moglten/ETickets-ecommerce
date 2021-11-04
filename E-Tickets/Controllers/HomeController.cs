@@ -6,32 +6,60 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using E_Tickets.Models.ViewModels;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
+using Microsoft.AspNetCore.Identity;
+using E_Tickets.Models.ModelsDB;
+using Microsoft.AspNetCore.Authorization;
 
 namespace E_Tickets.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(UserManager<ApplicationUser> userManager)
         {
-            _logger = logger;
+            _userManager = userManager;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public IActionResult Users()
+        {
+            return View(_userManager.Users.ToList());
+        }
+
+
+        [HttpGet]
+        [Authorize(Roles = "Admin, User")]
+        public IActionResult Contact()
         {
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, User")]
+        public async Task<IActionResult> ConformidContact(EmailViewModel emailContent)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+
+            ViewBag.result = SendEmail.SendAnEmail(emailContent);
+
+            return View("Contact");
+            
         }
+
+
+
+
     }
 }

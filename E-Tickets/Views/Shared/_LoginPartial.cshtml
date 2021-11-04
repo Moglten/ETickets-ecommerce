@@ -1,0 +1,54 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<ul class="navbar-nav" style="align-content:end; float:left;">
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="nav-item">
+         <div class="dropdown">
+             <button class="btn btn-outline-success dropdown-toggle mt-1 mr-2" type="button" id="profile-btn" data-toggle="dropdown" aria-expanded="false" title="Manage"><i class="bi bi-person-badge"></i>@UserManager.FindByNameAsync(User.Identity.Name).Result.GivenName</button>
+            <ul class="dropdown-menu" aria-labelledby="profile-btn">
+                @{if(User.IsInRole("Admin")){ 
+                <li>
+                    <a class="dropdown-item" asp-controller="Orders" asp-action="Index">
+                        <i class="bi bi-list"></i> Orders
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" asp-controller="Home" asp-action="Users">
+                        <i class="bi bi-people"></i> Users
+                    </a>
+                </li>
+                }
+                }
+                <li>
+                   <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">
+                        <i class="bi bi-person-badge"></i>Hello, @UserManager.FindByNameAsync(User.Identity.Name).Result.GivenName
+                   </a>
+                </li>
+
+            
+            </ul>
+         </div>
+    </li>
+    <li class="nav-item mt-1">
+        <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button  type="submit" class="btn btn-danger">Logout</button>
+        </form>
+    </li>
+
+
+  
+}
+else
+{   
+    <li class="nav-item">
+        <a class="btn btn-outline-success mr-2" style="margin-left:10px;"  asp-area="Identity" asp-page="/Account/Login">Login</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="btn btn-outline-primary" asp-area="Identity" asp-page="/Account/Register">Register</a>
+    </li>
+}
+</ul>

@@ -1,8 +1,67 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Landing Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>eTicket</title>
+        <link href="~/css/styles.css" rel="stylesheet" />
+    </head>
+    <body>
+        <header style="background-image: url(../media/bg1.png);height:500px;">
+            <div>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+               <br />
+               <div class="text-center my-5">
+                    <a class="btn btn-success" role="button" asp-action="Index" asp-controller="Movies"><h4>eTicket</h4></a>
+                    <h6 class="text-white m-2 display-3 ">Endless Entirtament with eTicket</h6>
+               </div>
+            </div>
+        </header>
+        <!-- Content section-->
+        <section class="py-5">
+            <div class="container my-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <h2>eTickets</h2>
+                        <p class="lead">Inspiration can come from anywhere – even films. Books are great to read and provide a solid perspective on things to help you achieve your goals. However, a visual, sound, and seeing humans play a role can be more effective sometimes. It conveys a more powerful message because you get to see everything in action rather than attempt to picture the words coming to life in your head. Yes, even the quintessential ecommerce market can learn a thing or two from some films.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Image element - set the background image for the header in the line below-->
+        <div class="py-5 bg-image-full" style="background-image: url(../media/joker.jpg);height:500px;">
+            <div style="height: 20rem"></div>
+        </div>
+        <!-- Content section-->
+        <section class="py-5">
+            <div class="container my-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <h2>Best Movies</h2>
+                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+      
+@section Scripts{
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="~/js/scripts.js"></script>
+        }
+    </body>
+</html>
