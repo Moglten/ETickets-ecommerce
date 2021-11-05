@@ -79,7 +79,7 @@ namespace E_Tickets.Controllers
         }
 
         
-        public async Task<IActionResult> CompleteOrder()
+        public async Task<IActionResult> OrderComplete()
         {
             var items = _shoppingcart.GetShoppingCartItems();
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 

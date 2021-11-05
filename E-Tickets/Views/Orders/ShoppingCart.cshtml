@@ -77,40 +77,39 @@
     <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 
     <script>
-
-    let _total = @Html.Raw(Model.ShoppingCartTotal);
-
-    paypal.Button.render({
-    env: 'sandbox',
-    client: {
-        sandbox: 'Aa384oRZtaQjd4-dZZOSxWWW8zHnas38F287-4_yrMIVxtGERwLD8XS_ZcAj-GfnrysvaowgqFV_cdbl'
-    },
-    locale: 'en_US',
-    style: {
-        size: 'small',
-        color: 'gold',
-        shape: 'pill'
-    },
-    commit: true,
-    payment: function (data, actions) {
-        return actions.payment.create({
-            transactions: [{
-                amount: {
-                    total: _total,
-                    currency: 'USD'
-                }
-            }]
-        });
-    },
-
-    onAuthorize: function (data, actions) {
-        return actions.payment.execute().then(function () {
-            console.log('Payment has been processed.');
-            document.location.href = '@Url.Action("CompleteOrder", "Orders", new { })';
-        });
-
-    },
-}, '#paypal-btn')
-
+        let _total = @Html.Raw(Model.ShoppingCartTotal);
+        paypal.Button.render({
+            //Configure environment
+            env: 'sandbox',
+            client: {
+                sandbox: 'AR0i_CPLaLShbf-Lp9iTFqgG9AovV-GjZKhazDMT2SQGwKy6Z2aCZkgaG_HxtdiGf4-BenHXOQPwHQBE'
+            },
+            //Customize button
+            locale: 'en_US',
+            style: {
+                size: 'small',
+                color: 'gold',
+                shape: 'pill'
+            },
+            commit: true,
+            //Set up a payment
+            payment: function (data, actions) {
+                return actions.payment.create({
+                    transactions: [{
+                        amount: {
+                            total: _total,
+                            currency: 'USD'
+                        }
+                    }]
+                });
+            },
+            //Execute the payment
+            onAuthorize: function (data, actions) {
+                return actions.payment.execute().then(function () {
+                    var url = '@Url.Action("OrderComplete", "Orders", new { })';
+                    window.location.href = url;
+                });
+            }
+        }, '#paypal-btn')
     </script>
 }

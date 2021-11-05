@@ -1,4 +1,4 @@
-﻿using E_Tickets.Models.ModelsDB;
+﻿    using E_Tickets.Models.ModelsDB;
 using E_Tickets.Models.RepositoryService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -42,7 +42,7 @@ namespace E_Tickets.Models.Cart
         {
             var shoppingCartItem = _shopingCartItems
                                     .GetAllEntitiesIQueryable()
-                                    .FirstOrDefault(n => n.Movie.Id == movie.Id);
+                                    .FirstOrDefault(n => n.Movie.Id == movie.Id && n.UserId == _accessor.HttpContext.User.Identity.GetUserId());
 
             if (shoppingCartItem == null)
             {
